@@ -6,45 +6,50 @@ namespace MonogameGame
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+
+        private int[,] map;
+        private Texture2D tileTexture;
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-        }
-
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
-        }
+            map = new MapGenerator(20, 20, 123).GenerateMap();
 
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
-
-            base.Update(gameTime);
+            tileTexture = new Texture2D(GraphicsDevice, 1, 1);
+            tileTexture.SetData(new Color[] { Color.White });
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            for (int x = 0; x < map.GetLength(0); x++)
+            {
+                for (int y = 0; y < map.GetLength(1); y++)
+                {
+                    if (map[x, y] == 0)
+                    {
+                        spriteBatch.Draw(tileTexture, new Vector2(x * 32, y * 32), Color.Green);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(tileTexture, new Vector2(x * 32, y * 32), Color.Brown);
+                    }
+                }
+            }
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

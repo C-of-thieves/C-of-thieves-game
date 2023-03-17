@@ -1,12 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace C-Of-Thieves
-{
-    internal class MapGenerator
-{
-}
-}
+    public class MapGenerator
+    {
+        private Random random;
+        private int[,] map;
+
+        public MapGenerator(int width, int height, int seed)
+        {
+            random = new Random(seed);
+            map = new int[width, height];
+        }
+
+        public int[,] GenerateMap()
+        {
+            for (int x = 0; x < map.GetLength(0); x++)
+            {
+                for (int y = 0; y < map.GetLength(1); y++)
+                {
+                    map[x, y] = random.Next(0, 2);
+                }
+            }
+
+            return map;
+        }
+    }
+
+    
+    
