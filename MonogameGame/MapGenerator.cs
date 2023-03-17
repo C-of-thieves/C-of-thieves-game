@@ -19,8 +19,12 @@ using Microsoft.Xna.Framework.Graphics;
             {
                 for (int y = 0; y < map.GetLength(1); y++)
                 {
-                    map[x, y] = random.Next(0, 2);
-                }
+                int randomNumber = random.Next(0, 10);
+                if (randomNumber < 8)
+                    map[x, y] = 0; // Grass
+                else
+                    map[x, y] = 1; // Tree
+            }
             }
 
             return map;

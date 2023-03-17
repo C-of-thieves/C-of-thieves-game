@@ -22,7 +22,7 @@ namespace MonogameGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            map = new MapGenerator(20, 20, 123).GenerateMap();
+            map = new MapGenerator(200, 200, 1).GenerateMap();
 
             tileTexture = new Texture2D(GraphicsDevice, 1, 1);
             tileTexture.SetData(new Color[] { Color.White });
@@ -40,11 +40,11 @@ namespace MonogameGame
                 {
                     if (map[x, y] == 0)
                     {
-                        spriteBatch.Draw(tileTexture, new Vector2(x * 32, y * 32), Color.Green);
+                        spriteBatch.Draw(Content.Load<Texture2D>("textureTest"), new Vector2(x * 64, y * 64), Color.White);
                     }
                     else
                     {
-                        spriteBatch.Draw(tileTexture, new Vector2(x * 32, y * 32), Color.Brown);
+                        spriteBatch.Draw(Content.Load<Texture2D>("water"), new Vector2(x * 32, y * 32), Color.White);
                     }
                 }
             }
