@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MonogameGame;
 public class Game1 : Game
@@ -67,6 +69,7 @@ public class Game1 : Game
         };
     }
 
+
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -89,7 +92,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
 
-        _spriteBatch.Draw(_mapTexture, Vector2.Zero, Color.White);
+        _spriteBatch.Draw(_mapTexture, Vector2.Zero, Color.Red);
 
         _player.Draw(_spriteBatch);
 
@@ -103,6 +106,4 @@ public class Game1 : Game
         base.Draw(gameTime);
     }
 
-    // Include the methods from the previous answer here
-    // GenerateMapTexture, GetColorFromValue, etc.
 }
